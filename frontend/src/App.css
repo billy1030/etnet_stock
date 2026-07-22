@@ -542,11 +542,11 @@ body {
 }
 
 .mini-stock-item.with-name {
-  grid-template-columns: 38px 75px 52px 42px 1fr 52px 16px;
+  grid-template-columns: 38px 75px 60px 52px 1fr 52px 16px;
 }
 
 .mini-stock-item.no-name {
-  grid-template-columns: 38px 67px 57px 1fr 52px 16px;
+  grid-template-columns: 38px 75px 65px 1fr 52px 16px;
 }
 
 .mini-stock-item {
@@ -638,7 +638,7 @@ body {
 .mini-stat-high {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
+  gap: 10px;
   font-size: 0.65rem;
   color: var(--text-secondary);
 }
@@ -646,7 +646,7 @@ body {
 .mini-stat-low {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
+  gap: 10px;
   font-size: 0.65rem;
   color: var(--text-secondary);
 }
