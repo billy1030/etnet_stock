@@ -22,6 +22,14 @@ A unified single-port web application that captures real-time stock details from
 
 ---
 
+## ☕ Support / Donation
+
+If you find this experimental dashboard useful and would like to support the work, you can buy me a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/billy1030)
+
+---
+
 ## 🛠️ How to Run
 
 Running the entire project requires only a single command from the root folder:
