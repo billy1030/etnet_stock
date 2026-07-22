@@ -123,12 +123,15 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           setRecentPrices((prev) => {
+            const changeMatch = data.change ? data.change.match(/\(([^)]+)\)/) : null;
+            const pct = changeMatch ? changeMatch[1] : '';
             const updated = { 
               ...prev, 
               [recentCode]: {
                 price: data.price,
                 high: data.highest,
-                low: data.lowest
+                low: data.lowest,
+                change: pct
               }
             };
             localStorage.setItem('recentPrices', JSON.stringify(updated));
@@ -164,12 +167,15 @@ function App() {
           return updated;
         });
         setRecentPrices((prev) => {
+          const changeMatch = data.change ? data.change.match(/\(([^)]+)\)/) : null;
+          const pct = changeMatch ? changeMatch[1] : '';
           const updated = { 
             ...prev, 
             [data.code]: {
               price: data.price,
               high: data.highest,
-              low: data.lowest
+              low: data.lowest,
+              change: pct
             }
           };
           localStorage.setItem('recentPrices', JSON.stringify(updated));
@@ -446,6 +452,10 @@ function App() {
 
                   <span className={`mini-item-price ${isActive ? priceColorClass : ''}`}>
                     {priceData.price || '-'}
+                  </span>
+
+                  <span className={`mini-item-pct ${priceData.change?.includes('+') ? 'up-color' : priceData.change?.includes('-') ? 'down-color' : ''}`}>
+                    {priceData.change || '-'}
                   </span>
                   
                   <button 
