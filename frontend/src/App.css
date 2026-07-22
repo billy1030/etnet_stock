@@ -546,7 +546,8 @@ body {
 }
 
 .mini-stock-item.no-name {
-  grid-template-columns: 38px 125px 115px 1fr 75px 16px;
+  /* Columns: Code (38px), High (78px), Low (85px), Price (1fr), Change (75px), Remove (16px) */
+  grid-template-columns: 38px 78px 85px 1fr 75px 16px;
 }
 
 .mini-stock-item {
