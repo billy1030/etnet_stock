@@ -6,6 +6,12 @@
 
 A unified single-port web application that captures real-time stock details from ETNet HK, visualizes price and volume histories in a custom split SVG chart, and offers a highly-optimized Mini Mode Watchlist widget.
 
+## 📸 Screenshots
+
+| Full Mode | Mini Mode |
+| :---: | :---: |
+| ![Full Mode](Image/Screenshot%202026-07-22%20120844.png) | ![Mini Mode](Image/Screenshot%202026-07-22%20120928.png) |
+
 ## 🚀 Features
 
 *   **Split Stock Chart**: Professional SVG chart displaying price trends (top pane) and dynamic volume bars (bottom pane) with full time stamps on the X-axis and Y-axis scale values.
