@@ -10,7 +10,7 @@ A unified single-port web application that captures real-time stock details from
 
 | Full Mode | Mini Mode |
 | :---: | :---: |
-| ![Full Mode](Image/Screenshot%202026-07-22%20120844.png) | ![Mini Mode](Image/Screenshot%202026-07-22%20120928.png) |
+| ![Full Mode](image/Screenshot%202026-07-22%20120844.png) | ![Mini Mode](image/Screenshot%202026-07-22%20120928.png) |
 
 ## 🚀 Features
 
