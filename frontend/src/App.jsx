@@ -15,12 +15,19 @@ function App() {
   const [flashClass, setFlashClass] = useState('');
   const [showLogs, setShowLogs] = useState(false);
   const [theme, setTheme] = useState('light');
-  const [isMiniMode, setIsMiniMode] = useState(false);
+  const [isMiniMode, setIsMiniMode] = useState(() => {
+    const saved = localStorage.getItem('isMiniMode');
+    return saved !== null ? JSON.parse(saved) : false;
+  });
   const [showMiniNames, setShowMiniNames] = useState(() => {
     const saved = localStorage.getItem('showMiniNames');
     return saved !== null ? JSON.parse(saved) : true;
   });
   const [hsiData, setHsiData] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('isMiniMode', JSON.stringify(isMiniMode));
+  }, [isMiniMode]);
 
   useEffect(() => {
     setInputValue(code);
