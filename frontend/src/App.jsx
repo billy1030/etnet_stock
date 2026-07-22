@@ -620,6 +620,12 @@ function App() {
                   <div className="cell"><span className="lbl">市</span><span className="val">{stockData.marketCap}</span></div>
                   <div className="cell"><span className="lbl">空</span><span className="val">{stockData.shortSell}</span></div>
                 </div>
+                <div className="stat-row">
+                  <div className="cell"><span className="lbl">52周高</span><span className="val up-color">{stockData.yearHigh}</span></div>
+                  <div className="cell"><span className="lbl">52周低</span><span className="val down-color">{stockData.yearLow}</span></div>
+                  <div className="cell"><span className="lbl">1月高</span><span className="val up-color">{stockData.monthHigh}</span></div>
+                  <div className="cell"><span className="lbl">1月低</span><span className="val down-color">{stockData.monthLow}</span></div>
+                </div>
               </div>
             </>
           ) : (

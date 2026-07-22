@@ -125,6 +125,8 @@ app.get('/api/quote', async (req, res) => {
         open: etfData['開市#'] || etfData['開市'] || '',
         monthHigh: etfData['1個月高低_max'] || '',
         monthLow: etfData['1個月高低_min'] || '',
+        yearHigh: etfData['52周高低_max'] || '',
+        yearLow: etfData['52周高低_min'] || '',
         marketCap: etfData['市值'] || '',
         shortSell: clean(etfData['賣空金額']),
         timestamp: new Date().toLocaleTimeString()
@@ -182,6 +184,18 @@ app.get('/api/quote', async (req, res) => {
     const monthLow = $(styleBCells.get(8)).find('.Number').text().trim();
     const shortSell = $(styleBCells.get(9)).find('.Number').text().trim();
 
+    // Extract 52-week high and low
+    let yearHigh = '';
+    let yearLow = '';
+    $('li').each((i, el) => {
+      const text = $(el).text().trim();
+      if (text === '52周高') {
+        yearHigh = $(el).next().text().trim();
+      } else if (text === '52周低') {
+        yearLow = $(el).next().text().trim();
+      }
+    });
+
     res.json({
       code: extractedCode,
       name,
@@ -195,6 +209,8 @@ app.get('/api/quote', async (req, res) => {
       open,
       monthHigh,
       monthLow,
+      yearHigh,
+      yearLow,
       marketCap,
       shortSell,
       timestamp: new Date().toLocaleTimeString()
