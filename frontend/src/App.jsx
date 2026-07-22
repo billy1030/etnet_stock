@@ -16,12 +16,55 @@ function App() {
   const [showLogs, setShowLogs] = useState(false);
   const [theme, setTheme] = useState('light');
   const [isMiniMode, setIsMiniMode] = useState(false);
+  const [showMiniNames, setShowMiniNames] = useState(() => {
+    const saved = localStorage.getItem('showMiniNames');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
   const [hsiData, setHsiData] = useState(null);
 
   useEffect(() => {
     setInputValue(code);
     localStorage.setItem('activeStockCode', code);
   }, [code]);
+
+  const toggleMiniNames = () => {
+    setShowMiniNames(prev => {
+      const newVal = !prev;
+      localStorage.setItem('showMiniNames', JSON.stringify(newVal));
+      return newVal;
+    });
+  };
+
+  const handlePrevStock = () => {
+    if (recentStocks.length <= 1) return;
+    const currentIndex = recentStocks.indexOf(code);
+    if (currentIndex === -1) {
+      // If current code not in recentStocks, just pick the first one
+      setCode(recentStocks[0]);
+      setHistory([]);
+      prevPriceRef.current = null;
+      return;
+    }
+    const prevIndex = (currentIndex - 1 + recentStocks.length) % recentStocks.length;
+    setCode(recentStocks[prevIndex]);
+    setHistory([]);
+    prevPriceRef.current = null;
+  };
+
+  const handleNextStock = () => {
+    if (recentStocks.length <= 1) return;
+    const currentIndex = recentStocks.indexOf(code);
+    if (currentIndex === -1) {
+      setCode(recentStocks[0]);
+      setHistory([]);
+      prevPriceRef.current = null;
+      return;
+    }
+    const nextIndex = (currentIndex + 1) % recentStocks.length;
+    setCode(recentStocks[nextIndex]);
+    setHistory([]);
+    prevPriceRef.current = null;
+  };
 
   // Capture last 10 used stock codes (persisted in localStorage)
   const [recentStocks, setRecentStocks] = useState(() => {
@@ -128,6 +171,7 @@ function App() {
             const updated = { 
               ...prev, 
               [recentCode]: {
+                name: data.name,
                 price: data.price,
                 high: data.highest,
                 low: data.lowest,
@@ -172,6 +216,7 @@ function App() {
           const updated = { 
             ...prev, 
             [data.code]: {
+              name: data.name,
               price: data.price,
               high: data.highest,
               low: data.lowest,
@@ -409,6 +454,23 @@ function App() {
                 </button>
               )}
               <button 
+                className="btn-icon mini-toggle-names" 
+                onClick={toggleMiniNames}
+                title={showMiniNames ? "Hide Company Names" : "Show Company Names"}
+              >
+                {showMiniNames ? (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                ) : (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                  </svg>
+                )}
+              </button>
+              <button 
                 className="btn-icon mini-expand" 
                 onClick={() => setIsMiniMode(false)}
                 title="Expand Dashboard"
@@ -427,11 +489,11 @@ function App() {
           <div className="mini-stock-list">
             {recentStocks.map((c) => {
               const isActive = code === c;
-              const priceData = recentPrices[c] || { price: '...', high: '...', low: '...' };
+              const priceData = recentPrices[c] || { name: '', price: '...', high: '...', low: '...' };
               return (
                 <div 
                   key={c} 
-                  className={`mini-stock-item ${isActive ? 'active' : ''} ${isActive ? flashClass : ''}`}
+                  className={`mini-stock-item ${isActive ? 'active' : ''} ${isActive ? flashClass : ''} ${showMiniNames ? 'with-name' : 'no-name'}`}
                   onClick={() => {
                     if (!isActive) {
                       setCode(c);
@@ -441,6 +503,12 @@ function App() {
                   }}
                 >
                   <span className="mini-item-code">{c}</span>
+                  
+                  {showMiniNames && (
+                    <span className="mini-item-name" title={priceData.name || ''}>
+                      {priceData.name || '-'}
+                    </span>
+                  )}
                   
                   <span className="mini-stat-high">
                     <span className="mini-lbl">高</span> {priceData.high || '-'}
@@ -495,6 +563,17 @@ function App() {
         </div>
 
         <div className="controls-area">
+          <button 
+            className="btn-icon nav-prev"
+            onClick={handlePrevStock}
+            title="Previous Stock"
+            disabled={recentStocks.length <= 1}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
           <input
             className="input-code"
             type="text"
@@ -509,6 +588,17 @@ function App() {
             }}
             placeholder="02513"
           />
+
+          <button 
+            className="btn-icon nav-next"
+            onClick={handleNextStock}
+            title="Next Stock"
+            disabled={recentStocks.length <= 1}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
           
           <input
             className="input-interval"

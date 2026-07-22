@@ -1,8 +1,8 @@
 @echo off
 cd /d "%~dp0"
-title ETNet Live Stock Dashboard
+title Live Stock Dashboard
 echo ==================================================
-echo   Starting ETNet Live Stock Dashboard...
+echo   Starting Live Stock Dashboard...
 echo ==================================================
 echo.
 echo Launching local Node scraper server...

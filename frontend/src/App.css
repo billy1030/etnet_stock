@@ -149,6 +149,13 @@ body {
   font-size: 0.75rem;
   text-align: center;
   height: 22px;
+  -moz-appearance: textfield;
+}
+
+.input-interval::-webkit-outer-spin-button,
+.input-interval::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Icon Buttons */
@@ -534,9 +541,16 @@ body {
   gap: 0.2rem;
 }
 
+.mini-stock-item.with-name {
+  grid-template-columns: 38px 75px 52px 42px 1fr 52px 16px;
+}
+
+.mini-stock-item.no-name {
+  grid-template-columns: 38px 67px 57px 1fr 52px 16px;
+}
+
 .mini-stock-item {
   display: grid;
-  grid-template-columns: 38px 67px 57px 1fr 52px 16px;
   align-items: center;
   padding: 0.2rem 0.3rem;
   background: var(--cell-bg);
@@ -570,6 +584,20 @@ body {
 .mini-item-code {
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+.mini-item-name {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 4px;
+}
+
+.mini-stock-item.active .mini-item-name {
+  color: var(--mini-active-text);
+  opacity: 0.85;
 }
 
 .mini-item-price {
@@ -705,4 +733,10 @@ body {
 .mini-hsi-change {
   font-size: 0.6rem;
   font-weight: 600;
+}
+
+.btn-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
 }
