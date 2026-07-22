@@ -12,5 +12,5 @@ echo Waiting for server to initialize...
 timeout /t 2 /nobreak >nul
 
 echo Opening dashboard in dedicated borderless window...
-start msedge --app=http://localhost:3300/ --window-size=506,330
+start msedge --app=http://localhost:3300/ --window-size=516,330
 exit
