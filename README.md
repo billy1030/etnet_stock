@@ -22,11 +22,11 @@ A unified single-port web application that captures real-time stock details from
 
 ---
 
-## ☕ Support / Donation
+## Support / Donations
 
-If you find this experimental dashboard useful and would like to support the work, you can buy me a coffee:
+If this project saved you a few minutes of typing every day, consider buying me a coffee ☕ — it keeps the project alive and pays for the test devices.
 
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/billy1030)
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/billy1030)
 
 ---
 
