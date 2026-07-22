@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 title ETNet Live Stock Dashboard
 echo ==================================================
 echo   Starting ETNet Live Stock Dashboard...
