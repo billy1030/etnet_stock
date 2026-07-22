@@ -28,7 +28,7 @@ app.get('/api/quote', async (req, res) => {
   const url = `https://www.etnet.com.hk/www/tc/stocks/realtime/quote.php?code=${formattedCode}`;
 
   try {
-    const response = await axios.get(url, {
+    let response = await axios.get(url, {
       headers: {
         'Referer': 'https://www.etnet.com.hk/',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -38,7 +38,98 @@ app.get('/api/quote', async (req, res) => {
       }
     });
 
-    const $ = cheerio.load(response.data);
+    // Check if the page is a JS redirect (common for ETFs redirecting from stocks/realtime to etf/quote)
+    const redirectMatch = response.data.match(/window\.location\.href\s*=\s*["'](\/www\/tc\/etf\/quote\/[^"']+)["']/);
+    let isEtf = false;
+    let $;
+
+    if (redirectMatch) {
+      isEtf = true;
+      const redirectUrl = `https://www.etnet.com.hk${redirectMatch[1]}`;
+      response = await axios.get(redirectUrl, {
+        headers: {
+          'Referer': 'https://www.etnet.com.hk/',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept-Language': 'zh-HK,zh;q=0.9,en;q=0.8',
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
+      $ = cheerio.load(response.data);
+    } else {
+      $ = cheerio.load(response.data);
+    }
+
+    if (isEtf) {
+      // ETF Parsing Logic
+      const titleText = $('title').text().trim();
+      let name = '';
+      let extractedCode = formattedCode;
+      
+      if (titleText) {
+        const parts = titleText.split('|');
+        if (parts.length > 1) {
+          name = parts[1].trim();
+        }
+        const codeMatch = parts[0].match(/^(\d+)/);
+        if (codeMatch) {
+          extractedCode = codeMatch[1];
+        }
+      }
+
+      if (!name) {
+        name = $('.quote-name').first().text().trim();
+      }
+
+      const priceText = $('section.quote-realtime-fields li.nominal').text().trim();
+      const changeVal = $('section.quote-realtime-fields li.change').text().trim();
+      const changePct = $('section.quote-realtime-fields li.percentagechange').text().trim();
+      const changeText = `${changeVal} ${changePct}`.trim();
+
+      if (!priceText) {
+        return res.status(404).json({ error: `ETF ${formattedCode} details not found.` });
+      }
+
+      const etfData = {};
+      $('.quote-field-list ul').each((i, ul) => {
+        const lis = $(ul).find('li');
+        if (lis.length >= 2) {
+          const key = $(lis.get(0)).text().trim();
+          let val = '';
+          const sparkline = $(lis.get(1)).find('.sparkline');
+          if (sparkline.length > 0) {
+            const min = sparkline.attr('data-sparkline_min') || '';
+            const max = sparkline.attr('data-sparkline_max') || '';
+            etfData[key + '_min'] = min;
+            etfData[key + '_max'] = max;
+            val = `${min} - ${max}`;
+          } else {
+            val = $(lis.get(1)).text().trim();
+          }
+          etfData[key] = val;
+        }
+      });
+
+      const clean = (val) => val ? val.replace(/\*$/, '').trim() : '';
+
+      return res.json({
+        code: extractedCode,
+        name,
+        price: priceText,
+        change: changeText,
+        highest: etfData['最高'] || '',
+        lowest: etfData['最低'] || '',
+        volume: etfData['成交股數'] || '',
+        turnover: etfData['成交金額'] || '',
+        prevClose: etfData['前收市'] || '',
+        open: etfData['開市#'] || etfData['開市'] || '',
+        monthHigh: etfData['1個月高低_max'] || '',
+        monthLow: etfData['1個月高低_min'] || '',
+        marketCap: etfData['市值'] || '',
+        shortSell: clean(etfData['賣空金額']),
+        timestamp: new Date().toLocaleTimeString()
+      });
+    }
 
     // Extract Name and Code
     const headerText = $('#StkQuoteHeader span').text().trim();

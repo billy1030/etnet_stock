@@ -1,16 +1,22 @@
 import axios from 'axios';
 
-async function test() {
+async function testCode(code) {
   try {
-    const res = await axios.get('http://localhost:5000/api/quote?code=02513');
-    console.log('API Response status:', res.status);
-    console.log('API Data:', JSON.stringify(res.data, null, 2));
+    const res = await axios.get(`http://localhost:3300/api/quote?code=${code}`);
+    console.log(`--- Result for ${code} ---`);
+    console.log('Status:', res.status);
+    console.log('Data:', JSON.stringify(res.data, null, 2));
   } catch (error) {
-    console.error('API Error:', error.message);
+    console.error(`Error for ${code}:`, error.message);
     if (error.response) {
-      console.error('API Error Response:', error.response.data);
+      console.error('Response Data:', error.response.data);
     }
   }
 }
 
-test();
+async function run() {
+  await testCode('02513');
+  await testCode('7709');
+}
+
+run();

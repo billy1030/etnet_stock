@@ -59,24 +59,20 @@ body {
 }
 
 .app-container {
-  width: 100%;
+  width: 480px;
+  margin: 0 auto;
   padding: 0.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-}
-
-.app-container:not(.mini-mode-wrapper) {
-  width: 480px;
-  margin: 0 auto;
   overflow: hidden;
 }
 
-.app-container:not(.mini-mode-wrapper).no-logs {
+.app-container.no-logs {
   height: 275px;
 }
 
-.app-container:not(.mini-mode-wrapper).has-logs {
+.app-container.has-logs {
   height: 405px;
 }
 
@@ -501,7 +497,6 @@ body {
 }
 
 .mini-mode-wrapper {
-  width: 100%;
   padding: 0.15rem;
 }
 

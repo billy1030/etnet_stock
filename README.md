@@ -14,17 +14,18 @@ A unified single-port web application that captures real-time stock details from
 
 ## 🚀 Features
 
-*   **Split Stock Chart**: Professional SVG chart displaying price trends (top pane) and dynamic volume bars (bottom pane) with full time stamps on the X-axis and Y-axis scale values.
-*   **Live HSI Ticker**: Real-time Hang Seng Index (恒指) values and changes loaded automatically in the background and displayed in the main header and Mini Mode widget.
+*   **Split Stock & ETF Chart**: Professional SVG chart displaying price trends (top pane) and dynamic volume bars (bottom pane) with full time stamps on the X-axis and Y-axis scale values.
+*   **ETF Redirect Support**: Seamlessly scrapes and parses ETF quotes (e.g., `7709`, `3033`) by dynamically detecting and following ETNet's JavaScript redirect pattern (pointing to dedicated `/www/tc/etf/quote/` pages).
 *   **Mini Mode Watchlist**:
-    *   Saves up to 10 stocks in local browser storage (`localStorage`).
-    *   Lists stocks vertically in a clean CSS grid layout that fits narrow browser sidebars (down to 240px wide).
+    *   Saves up to 10 stocks/ETFs in local browser storage (`localStorage`).
+    *   Lists items vertically in a clean CSS grid layout.
+    *   Aligned to match the standard dashboard width (`480px` and centered) for a consistent viewing experience.
     *   Shows live high/low columns with single-character Chinese labels (`高` / `低`) and current prices that update automatically in the background every 30 seconds.
     *   Includes a **Clean All** button to clear the cached watchlist and active monitors at once.
     *   **Position Lock**: Selecting a stock by clicking its row highlights it without shifting its order in the watchlist.
-*   **Smart Code Input**: Keystroke-decoupled input box in Full Mode that waits for you to press **Enter** to confirm before querying, preventing unnecessary background requests.
+*   **Clean Input Box**: Removed default browser autocomplete popups (datalists) to prevent interface clutter, while keeping keystroke decoupling (press **Enter** to submit).
 *   **Dual Color Themes**: Day Mode (light slate-blue style with a soft light-blue selected item background) and Night Mode.
-*   **State Persistence**: Automatically remembers and loads your last active stock when you reopen the page.
+*   **State Persistence**: Automatically remembers and loads your last active stock or ETF when you reopen the page.
 
 ---
 

@@ -498,7 +498,6 @@ function App() {
           <input
             className="input-code"
             type="text"
-            list="recent-list"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
@@ -510,9 +509,6 @@ function App() {
             }}
             placeholder="02513"
           />
-          <datalist id="recent-list">
-            {recentStocks.map(c => <option key={c} value={c} />)}
-          </datalist>
           
           <input
             className="input-interval"
