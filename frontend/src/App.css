@@ -69,11 +69,11 @@ body {
 }
 
 .app-container.no-logs {
-  height: 297px;
+  height: 322px;
 }
 
 .app-container.has-logs {
-  height: 427px;
+  height: 452px;
 }
 
 /* Compact Header */
