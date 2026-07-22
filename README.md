@@ -1,5 +1,9 @@
 # ETNet Live Stock Scraper & Chart Dashboard
 
+> [!NOTE]
+> **Disclaimer & Context**
+> This project is created as a testing experience for AI-assisted "vibe coding". It is intended for experimental evaluation and exploration purposes only.
+
 A unified single-port web application that scrapes real-time stock details from ETNet HK, visualizes price and volume histories in a custom split SVG chart, and offers a highly-optimized Mini Mode Watchlist widget.
 
 ## 🚀 Features
