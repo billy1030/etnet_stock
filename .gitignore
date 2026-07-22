@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.planning/
+.agents/
+.tempmediaStorage/
+.system_generated/
+*.log
+.DS_Store
+*.zip
