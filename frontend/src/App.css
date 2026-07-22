@@ -59,7 +59,7 @@ body {
 }
 
 .app-container {
-  width: 600px;
+  width: 620px;
   margin: 0 auto;
   padding: 0.25rem;
   display: flex;
@@ -542,12 +542,12 @@ body {
 }
 
 .mini-stock-item.with-name {
-  grid-template-columns: 38px 125px 78px 85px 1fr 75px 14px;
+  grid-template-columns: 38px 125px 98px 85px 1fr 75px 14px;
 }
 
 .mini-stock-item.no-name {
-  /* Columns: Code (48px - adds 10px space), High (78px), Low (85px), Price (1fr), Change (75px), Remove (16px) */
-  grid-template-columns: 48px 78px 85px 1fr 75px 16px;
+  /* Columns: Code (78px), High (98px - adds 20px space), Low (85px), Price (1fr), Change (75px), Remove (16px) */
+  grid-template-columns: 78px 98px 85px 1fr 75px 16px;
 }
 
 .mini-stock-item {
