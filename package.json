@@ -1,0 +1,17 @@
+{
+  "name": "etnet-live-stock-single-app",
+  "version": "1.0.0",
+  "description": "Unified single-page application for real-time ETNet stock quotes capture",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "npm run build --prefix frontend"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
