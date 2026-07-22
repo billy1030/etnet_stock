@@ -59,7 +59,7 @@ body {
 }
 
 .app-container {
-  width: 480px;
+  width: 490px;
   margin: 0 auto;
   padding: 0.25rem;
   display: flex;
@@ -107,7 +107,7 @@ body {
 .controls-area {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.2rem;
   flex-grow: 1;
   justify-content: flex-end;
 }
