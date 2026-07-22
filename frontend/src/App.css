@@ -541,7 +541,7 @@ body {
 
 .mini-stock-item {
   display: grid;
-  grid-template-columns: 38px 57px 57px 55px 52px 16px;
+  grid-template-columns: 38px 57px 57px 1fr 52px 16px;
   align-items: center;
   padding: 0.2rem 0.3rem;
   background: var(--cell-bg);
