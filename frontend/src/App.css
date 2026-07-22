@@ -97,6 +97,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-shrink: 0;
 }
 
 .brand-name {
@@ -665,6 +666,8 @@ body {
   align-items: center;
   gap: 0.25rem;
   font-size: 0.7rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .hsi-label {

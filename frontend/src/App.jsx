@@ -342,9 +342,9 @@ function App() {
           <text x={chartWidth + 10} y={topMargin + pricePaneHeight + 2} fill="var(--text-secondary)" fontSize="12" fontWeight="bold">{minPrice.toFixed(2)}</text>
 
           {/* X-Axis Time Labels at the bottom */}
-          <text x="6" y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75">{points[0].time}</text>
-          <text x={chartWidth / 2} y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75" textAnchor="middle">{points[Math.floor(points.length / 2)].time}</text>
-          <text x={chartWidth + 2} y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75" textAnchor="end">{points[points.length - 1].time}</text>
+          <text x="6" y="117" fill="var(--text-secondary)" fontSize="12" opacity="0.75">{points[0].time}</text>
+          <text x={chartWidth / 2} y="117" fill="var(--text-secondary)" fontSize="12" opacity="0.75" textAnchor="middle">{points[Math.floor(points.length / 2)].time}</text>
+          <text x={chartWidth + 2} y="117" fill="var(--text-secondary)" fontSize="12" opacity="0.75" textAnchor="end">{points[points.length - 1].time}</text>
 
           <rect x="2" y={topMargin + pricePaneHeight + paneGap} width={chartWidth + 6} height={volumePaneHeight} fill="rgba(15, 23, 42, 0.1)" rx="2"/>
           <line x1="2" y1={height - bottomMargin} x2={chartWidth + 8} y2={height - bottomMargin} stroke="var(--panel-border)" strokeWidth="0.5"/>
