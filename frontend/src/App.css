@@ -542,11 +542,11 @@ body {
 }
 
 .mini-stock-item.with-name {
-  grid-template-columns: 38px 125px 70px 70px 1fr 60px 14px;
+  grid-template-columns: 38px 125px 70px 80px 1fr 75px 14px;
 }
 
 .mini-stock-item.no-name {
-  grid-template-columns: 38px 125px 105px 1fr 60px 16px;
+  grid-template-columns: 38px 125px 105px 1fr 75px 16px;
 }
 
 .mini-stock-item {
