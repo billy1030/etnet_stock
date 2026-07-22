@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
-  const [code, setCode] = useState('02513');
-  const [inputValue, setInputValue] = useState('02513');
+  const [code, setCode] = useState(() => {
+    return localStorage.getItem('activeStockCode') || '02513';
+  });
+  const [inputValue, setInputValue] = useState(code);
   const [intervalSec, setIntervalSec] = useState(10);
   const [isPlaying, setIsPlaying] = useState(true);
   const [stockData, setStockData] = useState(null);
@@ -18,6 +20,7 @@ function App() {
 
   useEffect(() => {
     setInputValue(code);
+    localStorage.setItem('activeStockCode', code);
   }, [code]);
 
   // Capture last 10 used stock codes (persisted in localStorage)
@@ -276,10 +279,10 @@ function App() {
     const priceRange = maxPrice - minPrice || 1;
 
     const width = 450;
-    const height = 110;
+    const height = 120;
     const rightYAxisWidth = 45;
     const topMargin = 8;
-    const bottomMargin = 8;
+    const bottomMargin = 17;
     
     const pricePaneHeight = 65;
     const volumePaneHeight = 22;
@@ -337,6 +340,11 @@ function App() {
           <text x={chartWidth + 10} y={topMargin + 8} fill="var(--text-secondary)" fontSize="12" fontWeight="bold">{maxPrice.toFixed(2)}</text>
           <text x={chartWidth + 10} y={topMargin + pricePaneHeight / 2 + 4} fill="var(--text-secondary)" fontSize="12">{((maxPrice + minPrice) / 2).toFixed(2)}</text>
           <text x={chartWidth + 10} y={topMargin + pricePaneHeight + 2} fill="var(--text-secondary)" fontSize="12" fontWeight="bold">{minPrice.toFixed(2)}</text>
+
+          {/* X-Axis Time Labels at the bottom */}
+          <text x="6" y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75">{points[0].time}</text>
+          <text x={chartWidth / 2} y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75" textAnchor="middle">{points[Math.floor(points.length / 2)].time}</text>
+          <text x={chartWidth + 2} y="117" fill="var(--text-secondary)" fontSize="7.5" opacity="0.75" textAnchor="end">{points[points.length - 1].time}</text>
 
           <rect x="2" y={topMargin + pricePaneHeight + paneGap} width={chartWidth + 6} height={volumePaneHeight} fill="rgba(15, 23, 42, 0.1)" rx="2"/>
           <line x1="2" y1={height - bottomMargin} x2={chartWidth + 8} y2={height - bottomMargin} stroke="var(--panel-border)" strokeWidth="0.5"/>
@@ -428,15 +436,13 @@ function App() {
                 >
                   <span className="mini-item-code">{c}</span>
                   
-                  {/* High and Low stats with 1-word Chinese labels */}
-                  <div className="mini-item-stats">
-                    <span className="mini-stat-high">
-                      <span className="mini-lbl">高</span> {priceData.high || '-'}
-                    </span>
-                    <span className="mini-stat-low">
-                      <span className="mini-lbl">低</span> {priceData.low || '-'}
-                    </span>
-                  </div>
+                  <span className="mini-stat-high">
+                    <span className="mini-lbl">高</span> {priceData.high || '-'}
+                  </span>
+
+                  <span className="mini-stat-low">
+                    <span className="mini-lbl">低</span> {priceData.low || '-'}
+                  </span>
 
                   <span className={`mini-item-price ${isActive ? priceColorClass : ''}`}>
                     {priceData.price || '-'}
@@ -463,7 +469,7 @@ function App() {
 
   // 2. Full Mode Layout
   return (
-    <div className={`app-container ${theme}-theme`}>
+    <div className={`app-container ${theme}-theme ${showLogs ? 'has-logs' : 'no-logs'}`}>
       {/* Top Bar */}
       <header className="compact-header">
         <div className="title-area">
