@@ -59,7 +59,7 @@ body {
 }
 
 .app-container {
-  width: 620px;
+  width: 500px;
   margin: 0 auto;
   padding: 0.25rem;
   display: flex;
@@ -542,7 +542,7 @@ body {
 }
 
 .mini-stock-item.with-name {
-  grid-template-columns: 38px 125px 98px 85px 1fr 75px 14px;
+  grid-template-columns: 38px 105px 85px 75px 1fr 65px 14px;
 }
 
 .mini-stock-item.no-name {
