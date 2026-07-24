@@ -4,7 +4,21 @@
 > **Disclaimer & Context**
 > This project is created as a testing experience for AI-assisted "vibe coding". It is intended for experimental evaluation and exploration purposes only.
 
-A unified single-port web application that captures real-time stock details from ETNet HK, visualizes price and volume histories in a custom split SVG chart, and offers a highly-optimized Mini Mode Watchlist widget.
+A unified single-port application that captures real-time stock details from ETNet HK, visualizes price and volume histories in a custom split SVG chart, and offers a highly-optimized Mini Mode Watchlist widget.
+
+## 🔄 Evolution: From Node.js/React (v1) to Native Go (v2)
+
+### **Version 1: Node.js & Express + React Architecture**
+The initial version of this application was designed as a full-stack web app featuring a Node.js/Express backend that handled HTML scraping (`axios` + `cheerio`) and served a modern React frontend compiled with Vite. While functional and modular, running Version 1 required an installed Node.js runtime environment, launching local server ports (`3300`), installing hundreds of megabytes of `node_modules` dependencies, and manually navigating through an external web browser.
+
+### **Version 2: Rebuilt with Go & Wails (WebView2)**
+To drastically improve portability, execution speed, and user experience, the backend logic was completely rewritten in **Google Go** and paired with **Wails v2** (leveraging native OS WebView2). The compiled React UI frontend is embedded directly into the Go binary at compile-time using Go's native `embed.FS`.
+
+### **💡 Key Benefits of the Go Desktop Build**
+* ⚡ **Zero External Dependencies (Zero Node.js / npm needed)**: The entire application—backend server logic, HTML parser (`goquery`), and frontend UI assets—compiles into a single standalone `.exe` binary (~17 MB). Users can launch and use it out-of-the-box on any Windows machine without installing Node.js, npm, or extra runtimes.
+* 📦 **Instant Startup & Low Resource Footprint**: Unlike Electron apps which package heavy Chromium binaries (often 150MB+), the Go + Wails architecture uses the built-in Windows WebView2 runtime. This results in minimal RAM usage (~30-50 MB vs 300MB+ in Electron) and sub-second cold starts.
+* 🖥️ **Pure Native Desktop Experience**: Runs as an isolated native Windows desktop application window (with customizable dimensions, window controls, and embedded app icons), eliminating the need to launch or manage browser tabs.
+* 🔒 **Self-Contained & Ultra-Portable**: Everything lives inside a single executable (`ETNet_Live_Stock.exe`), making it ideal for running off USB flash drives or deploying across multiple devices effortlessly.
 
 ## 📸 Screenshots
 
