@@ -8,6 +8,8 @@ dist/
 build/
 out/
 release/
+dist-electron/
+*.exe
 
 # IDEs and editors
 .idea/
