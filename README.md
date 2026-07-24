@@ -53,15 +53,27 @@ If this project saved you a few minutes of typing every day, consider buying me 
 
 ## 🛠️ How to Run
 
-### Option 1: Native Windows Desktop App (Go + Wails) ⚡
+### Option 1: Native Desktop App (Go + Wails) ⚡
 
-A self-contained native Windows desktop app built with **Go** and **Wails v2** (WebView2). No Node.js runtime or external web browser required!
+A self-contained native desktop app built with **Go** and **Wails v2** (leveraging native OS WebView / WebView2). No Node.js runtime or external web browser required!
 
-* **Run Executable Directly**:
+* **Windows Executable**:
   Execute `etnet_go/ETNet_Live_Stock.exe` or build it yourself:
   ```bash
   cd etnet_go
   go build -tags desktop,production -ldflags="-H windowsgui" -o ETNet_Live_Stock.exe .
+  ```
+
+* **macOS (Apple Silicon & Intel)**:
+  Build native macOS desktop app bundle or binary directly on macOS:
+  ```bash
+  cd etnet_go
+  
+  # macOS App Bundle (recommended)
+  wails build
+
+  # Or standalone macOS binary via Go CLI:
+  go build -tags desktop,production -o ETNet_Live_Stock_mac .
   ```
 
 ---
