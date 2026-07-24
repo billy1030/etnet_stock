@@ -10,6 +10,7 @@ out/
 release/
 dist-electron/
 *.exe
+!etnet_go/ETNet_Live_Stock.exe
 
 # IDEs and editors
 .idea/
