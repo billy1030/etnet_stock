@@ -1,0 +1,10 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "ETNet Live Stock Dashboard",
+  "outputfilename": "ETNet_Live_Stock",
+  "frontend:build": "",
+  "frontend:install": "",
+  "author": {
+    "name": "Billy Lam"
+  }
+}
