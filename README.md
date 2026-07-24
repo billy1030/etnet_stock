@@ -39,9 +39,24 @@ If this project saved you a few minutes of typing every day, consider buying me 
 
 ## 🛠️ How to Run
 
-Running the entire project requires only a single command from the root folder:
+### Option 1: Native Windows Desktop App (Go + Wails) ⚡
 
-1.  **Install dependencies** (if not already done):
+A self-contained native Windows desktop app built with **Go** and **Wails v2** (WebView2). No Node.js runtime or external web browser required!
+
+* **Run Executable Directly**:
+  Execute `etnet_go/ETNet_Live_Stock.exe` or build it yourself:
+  ```bash
+  cd etnet_go
+  go build -tags desktop,production -ldflags="-H windowsgui" -o ETNet_Live_Stock.exe .
+  ```
+
+---
+
+### Option 2: Node.js / Express Web Server 🌐
+
+Running the web server version requires Node.js:
+
+1.  **Install dependencies**:
     ```bash
     npm install
     ```
@@ -56,6 +71,7 @@ Running the entire project requires only a single command from the root folder:
 
 ## 📁 Project Structure
 
+*   `/etnet_go`: Standalone native Go + Wails desktop application (`main.go`, `go.mod`, embedded web assets).
 *   `/backend`: Node/Express web server proxying requests to ETNet and serving built React files.
 *   `/frontend`: React client UI built using Vite.
 *   `package.json` (root): Launches the single-port Express server serving port `3300`.
